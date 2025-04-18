@@ -1,0 +1,23 @@
+per avviare docker: docker-compose up -d
+per avviare node: node server.js
+
+Istallare experss.js (è il framework web)
+cd fanta_be
+npm init -y
+npm install express mysql2
+
+Istallare sequelize (aiuta a gestire il database)
+npm i sequelize
+
+Istallare vite
+npm create vite@latest (x usare ultima versione) || npm create vite@4 (x usare versione specifica)
+seguire i passi dal terminale
+usare node verisone >= 16
+
+Istallare per node ed express i seguenti pacchetti
+npm i cors
+npm i nodemon --save-dev (andare nel pachage.json del BE e modificare lo script start in: "start": "nodemon server.js")
+ora posso fare npm start
+
+MVC ti aiuta a organizzare il tuo codice in modo chiaro e mantenibile.
+// Scope js studiare | Scooping dei moduli

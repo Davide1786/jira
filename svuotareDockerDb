@@ -1,0 +1,33 @@
+Quando provo tramite postman a lanciare una post ma il db mi risponde che ad es il campo
+name è vuto, anche se è pieno, significa che molto probabilmente doker ha conservato i dati vecchi di
+altro db.
+
+Il problema della persistenza dei dati tramite volume in Docker.
+
+💣 Il problema vero:
+Anche se nel tuo docker-compose.yml hai scritto: MYSQL_DATABASE: topolino
+
+Docker non sovrascrive il database se il volume (vecchio mysql_data) contiene già dati vecchi.
+E in questo caso, probabilmente contiene ancora un database chiamato app_jira da una vecchia configurazione.
+
+Docker dice:
+"C'è già roba dentro mysql_data, non tocco nulla!"
+
+✅ La soluzione: reset del volume
+Ferma i container
+
+Da terminale:
+lancia il comando: docker compose down
+
+Cancella il volume (nome da cancellare: es: mysql_data)
+lancia il comando: docker volume rm nome-tuo-progetto_mysql_data
+
+Se non conosci il nome esatto, puoi vedere tutti i volumi con:
+lancia il comando: docker volume ls
+
+E poi rimuovere il volume giusto.
+Fai partire di nuovo i container
+
+lancia il comando: docker compose up -d
+
+Ora verrà ricreatato da zero il volume e finalmente troverai il database topolino in phpMyAdmin su http://localhost:8080

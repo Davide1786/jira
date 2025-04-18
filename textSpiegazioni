@@ -1,0 +1,99 @@
+Posso aggiungere altre variabili d'ambiente al file docker-compose.yml per configurare ulteriormente l'applicazione.
+Ecco come potresti aggiungere EMAIL_SERVER:
+
+environment:
+DB_HOST: mysql
+DB_USER: pippo
+DB_PASSWORD: pippo123
+DB_NAME: app_jira
+DB_PORT: 3306
+EMAIL_SERVER: prova.server.com # Aggiunta della variabile EMAIL_SERVER
+Ora, all'interno del codice Node.js (in app), posso accedere alla variabile EMAIL_SERVER tramite:
+process.env.EMAIL_SERVER.
+
+Configurazione per diversi ambienti (sviluppo, test, produzione)
+
+Non è necessario creare nuovi file docker-compose.yml per ogni ambiente.
+
+Basta creare file .env separati per sviluppo, test e produzione:
+.env.development
+.env.test
+.env.production
+In ciascun file, definisco le variabili d'ambiente specifiche per quell'ambiente.
+
+Ad esempio:
+
+# .env.development
+
+DB_HOST=localhost
+DB_USER=dev_user
+DB_PASSWORD=dev_password
+DB_NAME=dev_db
+DB_PORT=3306
+EMAIL_SERVER=dev.email.com
+
+# .env.test
+
+DB_HOST=test_server
+DB_USER=test_user
+DB_PASSWORD=test_password
+DB_NAME=test_db
+DB_PORT=3306
+EMAIL_SERVER=test.email.com
+
+# .env.production
+
+DB_HOST=production_server
+DB_USER=prod_user
+DB_PASSWORD=prod_password
+DB_NAME=prod_db
+DB_PORT=3306
+EMAIL_SERVER=prod.email.com
+
+Quando eseguo docker-compose up, specifico quale file .env utilizzare. Ad esempio:
+docker-compose --env-file .env.development up # Per l'ambiente di sviluppo
+docker-compose --env-file .env.test up # Per l'ambiente di test
+docker-compose --env-file .env.production up # Per l'ambiente di produzione
+
+for (const [routeName, routeController] of Object.entries(routes)) {
+// ...
+}
+
+routes è un oggetto JavaScript, è definito come:
+const routes = {
+user: require("./routes/user"),
+};
+
+Object.entries(routes) è una funzione JavaScript che trasforma l'oggetto routes in un array
+di coppie chiave-valore.
+In questo caso, Object.entries(routes) restituirà un array simile a questo:
+[["user", require("./routes/user")]]
+
+Ogni elemento di questo array è un array a sua volta, contenente la chiave
+(il nome della rotta, come "user") e il valore (il modulo che gestisce quella rotta).
+
+for (const [routeName, routeController] of ...):
+Questo è il ciclo for...of che itera attraverso l'array restituito da Object.entries(routes).
+
+Destrutturazione: [routeName, routeController] è un esempio di destrutturazione di array.
+In ogni iterazione del ciclo:
+routeName assume il valore della chiave (il nome della rotta).
+routeController assume il valore del modulo che gestisce quella rotta (il risultato di require("./routes/user")).
+
+Corpo del ciclo:
+All'interno del ciclo, per ogni rotta, vengono definiti i vari tipi di rotta (get, post, put, delete).
+Viene quindi controllato se il modulo routeController ha le funzioni per gestire le richieste GET, POST, PUT e DELETE.
+Se una funzione esiste, definisce la rotta corrispondente utilizzando app.get, app.post, app.put o app.delete.
+
+Esempio pratico:
+Nella prima (e in questo caso unica) iterazione del ciclo:
+routeName sarà "user".
+routeController sarà il modulo restituito da require("./routes/user").
+Il ciclo verificherà se routeController ha funzioni come getAll, getById, create, ecc.
+Se, per esempio, routeController ha una funzione getAll, verrà definita una rotta app.get("/api/user", ...)
+
+In sintesi:
+Il ciclo for...of viene utilizzato per iterare attraverso le rotte definite nell'oggetto routes.
+Per ogni rotta, estrae il nome della rotta e il modulo di controllo, e quindi definisce le rotte
+API corrispondenti.
+\*/

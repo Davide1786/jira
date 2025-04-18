@@ -1,0 +1,46 @@
+Express.js è un framework lato-server per creare app in Node (server-side applications in Node.js). Fornisce strumenti e funzionalità per gestire richieste HTTP, definire rotte, e interagire con database. In sostanza, Express.js è lo scheletro su cui si costruisce il backend delle applicazioni web.
+
+Express.js: Backend, server-side, Node.js, gestione richieste HTTP, rotte, database.
+
+Sequelize è un Object-Relational Mapper (ORM) costruito su Node.js che semplifica notevolmente l'interazione con i database relazionali all'interno di applicazioni Node.js, in particolare quelle che utilizzano Express.js.
+
+Cosa fa Sequelize?
+
+Modellatura dei dati: Ti permette di definire i tuoi modelli di dati (tabelle) in JavaScript, creando una rappresentazione a oggetti delle tue entità.
+Associazioni: Definisci le relazioni tra i tuoi modelli (uno-a-uno, uno-a-molti, molti-a-molti) e Sequelize si occuperà di gestire le query SQL necessarie.
+Query: Fornisce un'interfaccia intuitiva per eseguire query al database, utilizzando JavaScript invece di scrivere direttamente SQL.
+Migrazioni: Ti consente di gestire le modifiche al tuo schema in modo controllato, creando script di migrazione che possono essere applicati in modo sicuro.
+Transazioni: Supporta le transazioni per garantire l'integrità dei dati nelle operazioni che coinvolgono più modifiche.
+
+Quando si utilizza module.exports in Node.js, si sta definendo ciò che un modulo (un file JavaScript) deve esportare per essere utilizzato da altri moduli o file nel progetto. In pratica, module.exports è il meccanismo che permette di rendere funzioni, oggetti, classi o variabili accessibili al di fuori del file in cui sono definite.
+
+Come funziona:
+In Node.js, ogni file rappresenta un modulo, e per impostazione predefinita, le variabili e funzioni definite in un file non sono visibili in altri file, a meno che non vengano esplicitamente esportate. module.exports viene utilizzato per specificare cosa il modulo deve rendere disponibile.
+
+belongsToMany: Quando hai bisogno di una relazione bidirezionale senza una gerarchia chiara tra i modelli. (molti-a-molti)
+hasMany: Un modello può avere molte istanze di un altro modello. (uno-a-molti)
+belongsTo: Un modello appartiene a un'unica istanza di un altro modello. (uno-a-uno)
+
+team.belongsToMany(player, { through: teamPlayer });
+es: prendi la tabella team mettila in relazione n a n con la tabella player
+through (attraverso) la tabella ponte che sarà teamPlayer
+
+belongsToMany: Relazione bidirezionale molti-a-molti (es: studenti e corsi).
+hasMany: Relazione unidirezionale uno-a-molti (es: un autore ha molti libri).
+belongsTo: Relazione unidirezionale uno-a-uno o uno-a-molti (es: un libro appartiene a un autore).
+
+RESTful API è un'interfaccia utilizzata da due sistemi informatici per scambiare informazioni in modo sicuro su Internet.
+CRUD è l'acronimo composto dalle iniziali delle parole inglesi Create, Read, Update e Delete.
+Queste quattro lettere fanno riferimento alle quattro principali operazioni che si svolgono su un database relazionale,
+ovvero la creazione di tabelle, dati e relazioni (create),
+la loro lettura (read),
+la loro modifica tramite aggiornamento (update)
+o eliminazione (delete).
+
+quando faccio una richiesta axios.get(${baseURL}/clubs);, sto innescando una catena di eventi nel mio server Express:
+Axios invia la richiesta.
+Express riceve la richiesta e la confronta con le rotte definite.
+Express trova la rotta corrispondente (/api/clubs).
+Express esegue la funzione di callback associata a quella rotta.
+La funzione di callback recupera i dati dei club dal database (o da qualsiasi altra fonte) e li invia come risposta ad Axios.
+Axios riceve la risposta e aggiorna l'interfaccia utente.

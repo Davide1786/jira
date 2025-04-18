@@ -7,7 +7,7 @@ services:
     restart: always
     environment:
       MYSQL_ROOT_PASSWORD: rootBoss123
-      MYSQL_DATABASE: topolino
+      MYSQL_DATABASE: jira
       MYSQL_USER: davide
       MYSQL_PASSWORD: davide123
     ports:
