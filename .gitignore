@@ -1,0 +1,7 @@
+# File e cartelle nella root che non vuoi tracciare
+node_modules/
+.env
+/startProject
+/svuotareDockerDb
+/textSpiegazioni/
+/SequelizeAndExpress/

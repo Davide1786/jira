@@ -96,4 +96,3 @@ In sintesi:
 Il ciclo for...of viene utilizzato per iterare attraverso le rotte definite nell'oggetto routes.
 Per ogni rotta, estrae il nome della rotta e il modulo di controllo, e quindi definisce le rotte
 API corrispondenti.
-\*/
