@@ -14,7 +14,14 @@ module.exports = (sequelize) => {
     email: {
       type: DataTypes.STRING,
       allowNull: false,
-      unique: true,
+      unique: true, // ❗ impedisce duplicati nel DB
+      validate: {
+        isEmail: true,
+      },
+    },
+    password: {
+      type: DataTypes.STRING,
+      allowNull: false,
     },
     role: {
       type: DataTypes.ENUM("admin", "developer", "viewer"),

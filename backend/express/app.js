@@ -1,7 +1,7 @@
 const express = require("express"); //  importo Express, il framework per creare server Node.js.
 const cors = require("cors");
-
 const bodyParser = require("body-parser");
+const loginRoute = require("./routes/login");
 
 const routes = {
   user: require("./routes/user"),
@@ -31,6 +31,10 @@ app.get("/", (req, res) => {
     <p>To experiment with POST/PUT/DELETE requests, use a tool for creating HTTP requests such as <a href='https://github.com/jakubroztocil/httpie#readme'>HTTPie</a>, <a href='https://www.postman.com/downloads/'>Postman</a>, or even <a href='https://en.wikipedia.org/wiki/CURL'>the curl command</a>, or write some JS code for it with <a href='https://github.com/sindresorhus/got#readme'>got</a>, <a href='https://github.com/sindresorhus/ky#readme'>ky</a> or <a href='https://github.com/axios/axios#readme'>axios</a>.</p>
   `);
 });
+
+// ‼️ Non serve mettere login dentro routes come oggetto, perché ha solo una route
+// e non segue la struttura REST standard.
+app.post("/api/login", makeHandlerAwareOfAsyncErrors(loginRoute.login));
 
 for (const [routeName, routeController] of Object.entries(routes)) {
   if (routeController.getAll) {
