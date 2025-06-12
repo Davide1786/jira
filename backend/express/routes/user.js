@@ -1,4 +1,4 @@
-const { models } = require("../../sequelize");
+const { models } = require("../../sequelize"); // Importa i modelli
 const bcrypt = require("bcrypt");
 
 async function getAll(req, res) {
@@ -45,7 +45,12 @@ async function create(req, res) {
     res.status(201).json(userWithoutPassword);
   } catch (error) {
     console.error("Errore nella creazione dell'utente:", error);
-    res.status(500).json({ error: "Errore interno", message: error.message });
+    // res.status(500).json({ error: "Errore interno", message: error.message });
+    res.status(500).json({
+      error: "Errore nella creazione dell'utente",
+      message: error.message, // Metto il messaggio dell'errore
+      stack: error.stack, // Metto la traccia dello stack
+    });
   }
 }
 

@@ -13,6 +13,25 @@ app.use(cors());
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 
+/*
+Questa è una funzione che: Accetta un'altra funzione come argomento.
+(handler) che restituisce una nuova funzione.
+
+Il parametro handler è la funzione di gestione della route che ho passato come argomento e
+ritorna async function (req, res, next) che è una funzione middleware di Express.
+
+questa fn riceve tre parametri:
+req: L'oggetto request di Express. Contiene tutte le informazioni sulla richiesta HTTP in arrivo (header, parametri della query, corpo della richiesta, ecc.).
+res: L'oggetto response di Express. Viene utilizzato per inviare una risposta HTTP al client (status code, header, corpo della risposta, ecc.).
+next: Una funzione fornita da Express. Se la middleware corrente non termina il ciclo request-response (ad esempio, inviando una risposta), deve chiamare next() per passare il controllo al prossimo middleware nella catena.
+
+Gestisce gli errori: Il blocco try...catch avvolge la chiamata a handler.
+Se la funzione handler genera un errore (e non lo gestisce internamente),
+l'esecuzione salta al blocco catch. Qui, next(error) viene chiamato.
+Questo è un meccanismo standard in Express per passare l'errore al middleware di gestione
+degli errori successivo nella catena.
+
+*/
 function makeHandlerAwareOfAsyncErrors(handler) {
   return async function (req, res, next) {
     try {
@@ -36,6 +55,11 @@ app.get("/", (req, res) => {
 // e non segue la struttura REST standard.
 app.post("/api/login", makeHandlerAwareOfAsyncErrors(loginRoute.login));
 
+// =============== qui sto solo testando se funziona
+const authenticateToken = require("../middleware/auth");
+// Esempio: proteggi la route che restituisce tutti gli utenti
+app.get("/api/user", authenticateToken, makeHandlerAwareOfAsyncErrors(routes.user.getAll));
+
 for (const [routeName, routeController] of Object.entries(routes)) {
   if (routeController.getAll) {
     app.get(`/api/${routeName}`, makeHandlerAwareOfAsyncErrors(routeController.getAll));
@@ -55,3 +79,9 @@ for (const [routeName, routeController] of Object.entries(routes)) {
 }
 
 module.exports = app;
+/*
+Questo file configura un server web Express.js che gestisce le richieste API.
+Utilizza middleware per CORS e per l'analisi del corpo delle richieste,
+definisce rotte per gestire le richieste relative agli utenti e utilizza
+un wrapper per gestire gli errori asincroni.
+*/
